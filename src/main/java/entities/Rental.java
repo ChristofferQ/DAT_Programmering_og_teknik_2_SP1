@@ -43,8 +43,6 @@ public class Rental implements Serializable {
         this.contactPerson = contactPerson;
     }
 
-// SUPER_HERO and also HOBBY
-
     public long getId() {
         return id;
     }

@@ -32,7 +32,6 @@ public class FacadeExample {
     //Private Constructor to ensure Singleton
     private FacadeExample() {}
     
-    
     /**
      * 
      * @param _emf
@@ -48,42 +47,6 @@ public class FacadeExample {
 
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
-    }
-
-    /**
-     * RenameMe Methods:
-     * //TODO Remove these methods before final commit
-     */
-    
-    public RenameMeDTO create(RenameMeDTO rm){
-        RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
-        EntityManager em = getEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(rme);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        return new RenameMeDTO(rme);
-    }
-
-    public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
-        EntityManager em = emf.createEntityManager();
-        RenameMe rm = em.find(RenameMe.class, id);
-//        if (rm == null)
-//            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new RenameMeDTO(rm);
-    }
-
-    public long getRenameMeCount(){
-        EntityManager em = getEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
-        }finally{  
-            em.close();
-        }
     }
 
     /**
@@ -129,6 +92,28 @@ public class FacadeExample {
             em.merge(t);
             em.getTransaction().commit();
             return new RentalDTO(r);
+
+        } finally {
+            em.close();
+        }
+    }
+
+    public RentalDTO editRental(RentalDTO r) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Rental rental = em.find(Rental.class, r.getId());
+
+            rental.setStartDate(r.getStartDate() );
+            rental.setEndDate(r.getEndDate());
+            rental.setPriceAnnual(r.getPriceAnnual());
+            rental.setDeposit(r.getDeposit());
+            rental.setContactPerson(r.getContactPerson());
+
+            em.getTransaction().begin();
+            em.merge(rental);
+            em.getTransaction().commit();
+
+            return new RentalDTO(rental);
 
         } finally {
             em.close();
@@ -187,12 +172,16 @@ public class FacadeExample {
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
-        //fe.getAllRentals().forEach(dto->System.out.println(dto));
-        //fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
-        //fe.connectRentalWithTenant(3,1);
-        //fe.deleteRental(3);
-        //fe.getTenantsByRental(2).forEach(dto -> System.out.println(dto));
-        //fe.getHouseByRental(5).forEach(dto -> System.out.println(dto));
+//        fe.getAllRentals().forEach(dto->System.out.println(dto));
+//        fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
+//        fe.connectRentalWithTenant(3,1);
+//        fe.deleteRental(3);
+//        fe.getTenantsByRental(2).forEach(dto -> System.out.println(dto));
+//        fe.getHouseByRental(5).forEach(dto -> System.out.println(dto));
+
+//        RentalDTO r = fe.getRentalById(1);
+//        r.setContactPerson("contactPerson2");
+//        fe.editRental(r);
     }
 
 }

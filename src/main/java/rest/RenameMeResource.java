@@ -71,6 +71,19 @@ public class RenameMeResource {
         return Response.ok(GSON.toJson(rEdited)).build();
     }
 
+    //RolesAllowed not added for easier testing
+    @Path("editrental/{id}")
+    //@RolesAllowed("admin")
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response editRental(@PathParam("id") long id, String rental) {
+        RentalDTO r = GSON.fromJson(rental, RentalDTO.class);
+        r.setId(id);
+        RentalDTO rEdited = FACADE.editRental(r);
+        return Response.ok(rEdited).build();
+    }
+
 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})

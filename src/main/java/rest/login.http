@@ -46,4 +46,15 @@ PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectrental/2
 }
 
 ###
-DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/deleterental/4
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/editrental/1
+
+{
+"startDate":"Oktober",
+"endDate":"Februar",
+"priceAnnual":2525,
+"deposit":5050,
+"contactPerson":"Bobby"
+}
+
+###
+DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/deleterental/1
