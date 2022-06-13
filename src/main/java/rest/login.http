@@ -39,7 +39,7 @@ POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
 }
 
 ###
-PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectrental/3
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectrental/2
 
 {
 "id":1

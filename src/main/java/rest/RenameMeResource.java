@@ -60,7 +60,7 @@ public class RenameMeResource {
         return Response.ok(re).build();
     }
 
-    // TODO Fix 500 error in login.http PUT request
+    //TODO Fix 500 error in login.http PUT request
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
