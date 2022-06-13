@@ -25,15 +25,6 @@ public class RenameMeResource {
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
-    @Path("count")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getRenameMeCount() {
-       
-        long count = FACADE.getRenameMeCount();
-        //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
-    }
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -64,7 +55,7 @@ public class RenameMeResource {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    @Path("connectrental/{id}")
+    @Path("rental/connect/{id}")
     public Response connectRentalWithTenant(@PathParam("id") long id, String tenant) {
         TenantDTO t = GSON.fromJson(tenant, TenantDTO.class);
         RentalDTO rEdited = FACADE.connectRentalWithTenant(id, t.getId());
@@ -72,7 +63,7 @@ public class RenameMeResource {
     }
 
     //RolesAllowed not added for easier testing
-    @Path("editrental/{id}")
+    @Path("rental/edit/{id}")
     //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
@@ -87,7 +78,7 @@ public class RenameMeResource {
 
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("deleterental/{id}")
+    @Path("rental/delete/{id}")
     public Response deleteBooking(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteRental(id))).build();
     }

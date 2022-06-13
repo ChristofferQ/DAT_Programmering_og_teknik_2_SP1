@@ -35,18 +35,18 @@ POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
 "endDate":"endDate4",
 "priceAnnual":4000,
 "deposit":4500,
-"contactPerson":"contactPerson4"
+"contactPerson":"Benny"
 }
 
 ###
-PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectrental/2
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/connect/7
 
 {
 "id":1
 }
 
 ###
-PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/editrental/1
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/edit/7
 
 {
 "startDate":"Oktober",
@@ -57,4 +57,4 @@ PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/editrental/1
 }
 
 ###
-DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/deleterental/1
+DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/delete/7
