@@ -159,13 +159,13 @@ public class FacadeExample {
         return new TenantDTO(t);
     }
 
-//    public List<TenantDTO> getTenantsByRental(long id) {
-//        EntityManager em = emf.createEntityManager();
-//        TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t WHERE t.rentals.id", Tenant.class).setParameter("id", id);
-//        List<Tenant> ts = query.getResultList();
-//        System.out.println("Testing getTenantsInHouse \n" + ts);
-//        return TenantDTO.getDtos(ts);
-//    }
+    public List<TenantDTO> getTenantsByRental(long id) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t INNER JOIN t.rentals r WHERE r.house.id =:id",Tenant.class).setParameter("id", id);
+        List<Tenant> ts = query.getResultList();
+        System.out.println("Testing getTenantsInHouse \n" + ts);
+        return TenantDTO.getDtos(ts);
+    }
 
     /**
      * House Methods:
@@ -185,7 +185,7 @@ public class FacadeExample {
         //fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
         //fe.connectRentalWithTenant(3,1);
         //fe.deleteRental(3);
-        //fe.getTenantsByRental(1);
+        fe.getTenantsByRental(1);
     }
 
 }
