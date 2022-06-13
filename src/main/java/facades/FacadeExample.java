@@ -1,6 +1,7 @@
 package facades;
 
 import dtos.RenameMeDTO;
+import dtos.RentalDTO;
 import entities.RenameMe;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 //import errorhandling.RenameMeNotFoundException;
+import entities.Rental;
 import entities.Tenant;
 import utils.EMF_Creator;
 
@@ -76,17 +78,17 @@ public class FacadeExample {
         }
     }
     
-    public List<RenameMeDTO> getAll(){
+    public List<RentalDTO> getAllRentals(){
         EntityManager em = emf.createEntityManager();
-        TypedQuery<RenameMe> query = em.createQuery("SELECT r FROM RenameMe r", RenameMe.class);
-        List<RenameMe> rms = query.getResultList();
-        return RenameMeDTO.getDtos(rms);
+        TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
+        List<Rental> rs = query.getResultList();
+        return RentalDTO.getDtos(rs);
     }
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
-        fe.getAll().forEach(dto->System.out.println(dto));
+        fe.getAllRentals().forEach(dto->System.out.println(dto));
     }
 
 }
