@@ -1,11 +1,11 @@
 package utils;
 
 
-import entities.Role;
-import entities.User;
+import entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.Set;
 
 public class SetupTestUsers {
 
@@ -24,6 +24,16 @@ public class SetupTestUsers {
     User admin = new User("admin", "test123");
     User both = new User("user_admin", "test123");
 
+    Tenant tenant1 = new Tenant("Name1",123456,"Job1");
+    Tenant tenant2 = new Tenant("Name2",123456,"Job2");
+
+    Rental rental1 = new Rental("startDate1","endDate1",1000,1500,"contactPerson1");
+    Rental rental2 = new Rental("startDate2","endDate2",2000,2500,"contactPerson2");
+
+    House house1 = new House("address1","city1",1);
+    House house2 = new House("address2","city2",2);
+
+
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))
       throw new UnsupportedOperationException("You have not changed the passwords");
 
@@ -39,6 +49,12 @@ public class SetupTestUsers {
     em.persist(user);
     em.persist(admin);
     em.persist(both);
+    em.persist(tenant1);
+    em.persist(tenant2);
+    em.persist(rental1);
+    em.persist(rental2);
+    em.persist(house1);
+    em.persist(house2);
     em.getTransaction().commit();
     System.out.println("PW: " + user.getUserPass());
     System.out.println("Testing user with OK password: " + user.verifyPassword("test"));

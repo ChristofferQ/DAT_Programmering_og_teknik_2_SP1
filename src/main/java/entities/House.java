@@ -3,10 +3,13 @@ package entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class House implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +20,12 @@ public class House implements Serializable {
 
     public House() {
     }
-    
-    @OneToMany(mappedBy = "house")
-    private List<Rental> rentals = new ArrayList<>();
+
+    public House(String address, String city, int numberOfRooms) {
+        this.address = address;
+        this.city = city;
+        this.numberOfRooms = numberOfRooms;
+    }
 
     public long getId() {
         return id;
@@ -52,4 +58,5 @@ public class House implements Serializable {
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
     }
+
 }

@@ -3,14 +3,17 @@ package entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "RENTAL")
 public class Rental implements Serializable {
+
     private static final long SerialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private long id;
     private String startDate;
     private String endDate;
@@ -18,19 +21,26 @@ public class Rental implements Serializable {
     private int deposit;
     private String contactPerson;
 
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Owning side
+    @JoinTable(
+            name = "TENANT_RENTALS",
+            joinColumns = {@JoinColumn(name = "rental_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tenant_id")}
+    )
+    private Set<Tenant> tenants = new HashSet<>();
+
     public Rental() {
     }
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private House house;
+    public Rental(String startDate, String endDate, int priceAnnual, int deposit, String contactPerson) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.priceAnnual = priceAnnual;
+        this.deposit = deposit;
+        this.contactPerson = contactPerson;
+    }
 
-    @ManyToMany(mappedBy = "Tenant")
-    @JoinTable(
-            name = "RENTAL_TENANT",
-            joinColumns = @JoinColumn(name = "RENTAL_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "TENANT_ID", referencedColumnName = "ID"))
-    private List<Rental> rentals = new ArrayList<Rental>();
-
+// SUPER_HERO and also HOBBY
 
     public long getId() {
         return id;
@@ -79,4 +89,13 @@ public class Rental implements Serializable {
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
     }
+
+    public Set<Tenant> getTenants() {
+        return tenants;
+    }
+
+    public void addTenant(Tenant tenant) {
+        tenants.add(tenant);
+    }
+
 }

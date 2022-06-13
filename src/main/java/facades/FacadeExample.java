@@ -3,11 +3,13 @@ package facades;
 import dtos.RenameMeDTO;
 import entities.RenameMe;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 //import errorhandling.RenameMeNotFoundException;
+import entities.Tenant;
 import utils.EMF_Creator;
 
 /**
@@ -39,6 +41,8 @@ public class FacadeExample {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+
+
     
     public RenameMeDTO create(RenameMeDTO rm){
         RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
@@ -59,6 +63,7 @@ public class FacadeExample {
 //            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
         return new RenameMeDTO(rm);
     }
+
     
     //TODO Remove/Change this before use
     public long getRenameMeCount(){
