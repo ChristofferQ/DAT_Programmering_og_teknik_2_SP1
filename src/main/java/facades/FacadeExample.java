@@ -163,7 +163,6 @@ public class FacadeExample {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t INNER JOIN t.rentals r WHERE r.house.id =:id",Tenant.class).setParameter("id", id);
         List<Tenant> ts = query.getResultList();
-        System.out.println("Testing getTenantsInHouse \n" + ts);
         return TenantDTO.getDtos(ts);
     }
 
@@ -177,6 +176,13 @@ public class FacadeExample {
         return new HouseDTO(h);
     }
 
+    public List<HouseDTO> getHouseByRental(long id) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<House> query = em.createQuery("SELECT r.house FROM Rental r WHERE r.id =:id", House.class).setParameter("id", id);
+        List<House> hs = query.getResultList();
+        return HouseDTO.getDtos(hs);
+    }
+
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
@@ -185,7 +191,8 @@ public class FacadeExample {
         //fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
         //fe.connectRentalWithTenant(3,1);
         //fe.deleteRental(3);
-        fe.getTenantsByRental(1);
+        //fe.getTenantsByRental(2).forEach(dto -> System.out.println(dto));
+        //fe.getHouseByRental(5).forEach(dto -> System.out.println(dto));
     }
 
 }
