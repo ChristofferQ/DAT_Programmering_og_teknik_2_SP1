@@ -67,9 +67,16 @@ public class Tenant implements Serializable {
         return rentals;
     }
 
-    public void addRental (String startDate, String endDate, int priceAnnual, int deposit, String contactPerson) {
+    public void addRentals (String startDate, String endDate, int priceAnnual, int deposit, String contactPerson) {
         Rental newRental = new Rental(startDate, endDate, priceAnnual, deposit, contactPerson);
         newRental.addTenant(this);
         this.rentals.add(newRental);
+    }
+
+    public void addRental (Rental rental) {
+        this.rentals.add(rental);
+        if (rental.getTenants() != this) {
+            rental.addTenant(this);
+        }
     }
 }

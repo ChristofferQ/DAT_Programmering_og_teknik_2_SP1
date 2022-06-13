@@ -113,6 +113,25 @@ public class FacadeExample {
         return new RentalDTO(re);
     }
 
+    public RentalDTO connectRentalWithTenant(long rentalId, long tenantId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Rental r = em.find(Rental.class, rentalId);
+            Tenant t = em.find(Tenant.class, tenantId);
+
+            r.addTenant(t);
+            t.addRental(r);
+
+            em.getTransaction().begin();
+            em.merge(t);
+            em.getTransaction().commit();
+            return new RentalDTO(r);
+
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Tenant Methods:
      */
@@ -139,6 +158,7 @@ public class FacadeExample {
         FacadeExample fe = getFacadeExample(emf);
         fe.getAllRentals().forEach(dto->System.out.println(dto));
         fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
+        fe.connectRentalWithTenant(3,2);
     }
 
 }
