@@ -44,30 +44,27 @@ public class RenameMeResource {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    @Path("createrental")
+    @Path("rental/create")
     public Response createRental(String Rental) {
         RentalDTO r = GSON.fromJson(Rental, RentalDTO.class);
         RentalDTO re = FACADE.createRental(r);
         return Response.ok(re).build();
     }
 
-    //TODO Fix 500 error in login.http PUT request
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    @Path("rental/connect/{id}")
+    @Path("rental/connect/tenant/{id}")
     public Response connectRentalWithTenant(@PathParam("id") long id, String tenant) {
         TenantDTO t = GSON.fromJson(tenant, TenantDTO.class);
         RentalDTO rEdited = FACADE.connectRentalWithTenant(id, t.getId());
         return Response.ok(GSON.toJson(rEdited)).build();
     }
 
-    //RolesAllowed not added for easier testing
-    @Path("rental/edit/{id}")
-    //@RolesAllowed("admin")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
+    @Path("rental/edit/{id}")
     public Response editRental(@PathParam("id") long id, String rental) {
         RentalDTO r = GSON.fromJson(rental, RentalDTO.class);
         r.setId(id);

@@ -28,7 +28,7 @@ GET http://localhost:8080/devops_starter_war_exploded/api/xxx/rentals
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/1
 
 ###
-POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
+POST http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/create
 
 {
 "startDate":"startDate4",
@@ -39,7 +39,7 @@ POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
 }
 
 ###
-PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/connect/7
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/connect/tenant/5
 
 {
 "id":1
