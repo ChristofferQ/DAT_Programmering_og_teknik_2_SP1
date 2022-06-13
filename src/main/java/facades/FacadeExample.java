@@ -58,6 +58,20 @@ public class FacadeExample {
         }
         return new RenameMeDTO(rme);
     }
+
+    public RentalDTO createRental(RentalDTO r){
+        Rental re = new Rental(r.getStartDate(), r.getEndDate(), r.getPriceAnnual(), r.getDeposit(), r.getContactPerson());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(re);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new RentalDTO(re);
+    }
+
     public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
         RenameMe rm = em.find(RenameMe.class, id);
@@ -99,6 +113,7 @@ public class FacadeExample {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
         fe.getAllRentals().forEach(dto->System.out.println(dto));
+        fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
     }
 
 }

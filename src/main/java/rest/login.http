@@ -26,3 +26,14 @@ GET http://localhost:8080/devops_starter_war_exploded/api/xxx/rentals
 
 ###
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/1
+
+###
+POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
+
+{
+"startDate":"startDate4",
+"endDate":"endDate4",
+"priceAnnual":4000,
+"deposit":4500,
+"contactPerson":"contactPerson4"
+}
