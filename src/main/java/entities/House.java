@@ -18,6 +18,9 @@ public class House implements Serializable {
     private String city;
     private int numberOfRooms;
 
+    @OneToMany(mappedBy = "house", cascade = CascadeType.PERSIST) // Non owning side
+    private Set<Rental> rentals = new HashSet<Rental>();
+
     public House() {
     }
 
@@ -57,6 +60,14 @@ public class House implements Serializable {
 
     public void setNumberOfRooms(int numberOfRooms) {
         this.numberOfRooms = numberOfRooms;
+    }
+
+    public Set<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void AddRental(Rental rental) {
+        this.rentals.add(rental);
     }
 
 }

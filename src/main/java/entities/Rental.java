@@ -29,6 +29,9 @@ public class Rental implements Serializable {
     )
     private Set<Tenant> tenants = new HashSet<>();
 
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) // Owning side
+    private House house;
+
     public Rental() {
     }
 
@@ -96,6 +99,11 @@ public class Rental implements Serializable {
 
     public void addTenant(Tenant tenant) {
         tenants.add(tenant);
+    }
+
+    public void addHouse(House house) {
+        this.house = house;
+        house.AddRental(this);
     }
 
 }

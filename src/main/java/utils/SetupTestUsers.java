@@ -33,8 +33,11 @@ public class SetupTestUsers {
     House house1 = new House("address1","city1",1);
     House house2 = new House("address2","city2",2);
 
-    rental1.addTenant(tenant2);
-    rental2.addTenant(tenant1);
+    rental1.addTenant(tenant1);
+    rental2.addTenant(tenant2);
+
+    rental1.addHouse(house1);
+    rental2.addHouse(house2);
 
 
     if(admin.getUserPass().equals("test")||user.getUserPass().equals("test")||both.getUserPass().equals("test"))

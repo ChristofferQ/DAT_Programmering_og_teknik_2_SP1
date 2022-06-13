@@ -77,13 +77,23 @@ public class FacadeExample {
             em.close();
         }
     }
+
+    public RentalDTO getRentalById(long id) {
+        EntityManager em = emf.createEntityManager();
+        Rental r = em.find(Rental.class, id);
+        return new RentalDTO(r);
+    }
     
-    public List<RentalDTO> getAllRentals(){
+    public List<RentalDTO> getAllRentals() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
         List<Rental> rs = query.getResultList();
         return RentalDTO.getDtos(rs);
     }
+
+//    public List<HouseDTO> getHouseByRental() {
+//
+//    }
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
