@@ -1,7 +1,10 @@
 package facades;
 
+import dtos.HouseDTO;
 import dtos.RenameMeDTO;
 import dtos.RentalDTO;
+import dtos.TenantDTO;
+import entities.House;
 import entities.RenameMe;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +47,10 @@ public class FacadeExample {
         return emf.createEntityManager();
     }
 
-
+    /**
+     * RenameMe Methods:
+     * //TODO Remove these methods before final commit
+     */
     
     public RenameMeDTO create(RenameMeDTO rm){
         RenameMe rme = new RenameMe(rm.getDummyStr1(), rm.getDummyStr2());
@@ -57,6 +63,41 @@ public class FacadeExample {
             em.close();
         }
         return new RenameMeDTO(rme);
+    }
+
+    public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        RenameMe rm = em.find(RenameMe.class, id);
+//        if (rm == null)
+//            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
+        return new RenameMeDTO(rm);
+    }
+
+    public long getRenameMeCount(){
+        EntityManager em = getEntityManager();
+        try{
+            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
+            return renameMeCount;
+        }finally{  
+            em.close();
+        }
+    }
+
+    /**
+     * Rental Methods:
+     */
+
+    public RentalDTO getRentalById(long id) {
+        EntityManager em = emf.createEntityManager();
+        Rental r = em.find(Rental.class, id);
+        return new RentalDTO(r);
+    }
+    
+    public List<RentalDTO> getAllRentals() {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
+        List<Rental> rs = query.getResultList();
+        return RentalDTO.getDtos(rs);
     }
 
     public RentalDTO createRental(RentalDTO r){
@@ -72,42 +113,26 @@ public class FacadeExample {
         return new RentalDTO(re);
     }
 
-    public RenameMeDTO getById(long id) { //throws RenameMeNotFoundException {
+    /**
+     * Tenant Methods:
+     */
+
+    public TenantDTO getTenantById(long id) {
         EntityManager em = emf.createEntityManager();
-        RenameMe rm = em.find(RenameMe.class, id);
-//        if (rm == null)
-//            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new RenameMeDTO(rm);
+        Tenant t = em.find(Tenant.class, id);
+        return new TenantDTO(t);
     }
 
-    
-    //TODO Remove/Change this before use
-    public long getRenameMeCount(){
-        EntityManager em = getEntityManager();
-        try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
-        }finally{  
-            em.close();
-        }
+    /**
+     * House Methods:
+     */
+
+    public HouseDTO getHouseById(long id) {
+        EntityManager em = emf.createEntityManager();
+        House h = em.find(House.class, id);
+        return new HouseDTO(h);
     }
 
-    public RentalDTO getRentalById(long id) {
-        EntityManager em = emf.createEntityManager();
-        Rental r = em.find(Rental.class, id);
-        return new RentalDTO(r);
-    }
-    
-    public List<RentalDTO> getAllRentals() {
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Rental> query = em.createQuery("SELECT r FROM Rental r", Rental.class);
-        List<Rental> rs = query.getResultList();
-        return RentalDTO.getDtos(rs);
-    }
-
-//    public List<HouseDTO> getHouseByRental() {
-//
-//    }
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
