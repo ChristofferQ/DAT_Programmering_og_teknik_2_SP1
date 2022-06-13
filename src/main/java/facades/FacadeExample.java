@@ -144,7 +144,7 @@ public class FacadeExample {
         return new TenantDTO(t);
     }
 
-    public List<TenantDTO> getTenantsByRental(long id) {
+    public List<TenantDTO> getTenantsInHouseByRental(long id) {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Tenant> query = em.createQuery("SELECT t FROM Tenant t INNER JOIN t.rentals r WHERE r.house.id =:id",Tenant.class).setParameter("id", id);
         List<Tenant> ts = query.getResultList();

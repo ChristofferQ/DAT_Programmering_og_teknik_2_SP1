@@ -26,6 +26,10 @@ public class RenameMeResource {
         return "{\"msg\":\"Hello World\"}";
     }
 
+    /**
+     * Rental Endpoints:
+     */
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("rental/{id}")
@@ -39,7 +43,6 @@ public class RenameMeResource {
     public Response getAllRentals() {
         return Response.ok(GSON.toJson(FACADE.getAllRentals())).build();
     }
-
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -72,12 +75,47 @@ public class RenameMeResource {
         return Response.ok(rEdited).build();
     }
 
-
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Path("rental/delete/{id}")
     public Response deleteBooking(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteRental(id))).build();
+    }
+
+    /**
+     * Tenant Endpoints:
+     */
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("tenant/{id}")
+    public Response getTenantById(@PathParam("id")long id) {
+        return Response.ok(GSON.toJson(FACADE.getTenantById(id))).build();
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("tenant/rental/{id}")
+    public Response getTenantsByRental(@PathParam("id") long id) {
+        return Response.ok(GSON.toJson(FACADE.getTenantsInHouseByRental(id))).build();
+    }
+
+    /**
+     * House Endpoints:
+     */
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("house/{id}")
+    public Response getHouseById(@PathParam("id")long id) {
+        return Response.ok(GSON.toJson(FACADE.getHouseById(id))).build();
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("house/rental/{id}")
+    public Response getHouseByRental(@PathParam("id")long id) {
+        return Response.ok(GSON.toJson(FACADE.getHouseByRental(id))).build();
     }
 
 }
