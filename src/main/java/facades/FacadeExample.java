@@ -8,9 +8,12 @@ import entities.House;
 import entities.RenameMe;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.ws.rs.core.Response;
 
 //import errorhandling.RenameMeNotFoundException;
 import entities.Rental;
@@ -132,6 +135,19 @@ public class FacadeExample {
         }
     }
 
+    public Response deleteRental(long id) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            Query query = em.createQuery("DELETE FROM Rental r WHERE r.id = :id").setParameter("id", id);
+            query.executeUpdate();
+            em.getTransaction().commit();
+            return Response.ok().build();
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Tenant Methods:
      */
@@ -156,9 +172,10 @@ public class FacadeExample {
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         FacadeExample fe = getFacadeExample(emf);
-        fe.getAllRentals().forEach(dto->System.out.println(dto));
-        fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
-        fe.connectRentalWithTenant(3,2);
+        //fe.getAllRentals().forEach(dto->System.out.println(dto));
+        //fe.createRental(new RentalDTO(new Rental("startDate3", "endDate3", 3000, 3500, "contactPerson3")));
+        //fe.connectRentalWithTenant(3,1);
+        //fe.deleteRental(3);
     }
 
 }

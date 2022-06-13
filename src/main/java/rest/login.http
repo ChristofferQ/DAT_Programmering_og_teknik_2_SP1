@@ -37,3 +37,13 @@ POST http://localhost:8080/devops_starter_war_exploded/api/xxx/createrental
 "deposit":4500,
 "contactPerson":"contactPerson4"
 }
+
+###
+PUT http://localhost:8080/devops_starter_war_exploded/api/xxx/connectrental/3
+
+{
+"id":1
+}
+
+###
+DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/deleterental/4
