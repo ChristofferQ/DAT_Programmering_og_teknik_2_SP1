@@ -18,7 +18,7 @@ public class House implements Serializable {
     private String city;
     private int numberOfRooms;
 
-    @OneToMany(mappedBy = "house", cascade = CascadeType.PERSIST) // Non owning side
+    @OneToMany(mappedBy = "house", cascade = CascadeType.PERSIST)
     private Set<Rental> rentals = new HashSet<Rental>();
 
     public House() {

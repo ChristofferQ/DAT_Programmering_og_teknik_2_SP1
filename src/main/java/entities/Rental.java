@@ -21,7 +21,7 @@ public class Rental implements Serializable {
     private int deposit;
     private String contactPerson;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Owning side
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(
             name = "TENANT_RENTALS",
             joinColumns = {@JoinColumn(name = "rental_id")},
@@ -29,7 +29,7 @@ public class Rental implements Serializable {
     )
     private Set<Tenant> tenants = new HashSet<>();
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) // Owning side
+    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private House house;
 
     public Rental() {

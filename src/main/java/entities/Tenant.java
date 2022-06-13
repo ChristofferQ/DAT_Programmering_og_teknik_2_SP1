@@ -19,7 +19,7 @@ public class Tenant implements Serializable {
     private int phone;
     private String job;
 
-    @ManyToMany(mappedBy = "tenants", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Non owning side
+    @ManyToMany(mappedBy = "tenants", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Rental> rentals = new HashSet<>();
 
     public Tenant() {

@@ -102,12 +102,15 @@ public class FacadeExample {
         EntityManager em = emf.createEntityManager();
         try {
             Rental rental = em.find(Rental.class, r.getId());
+//            House house = em.find(House.class, r.se);
 
             rental.setStartDate(r.getStartDate() );
             rental.setEndDate(r.getEndDate());
             rental.setPriceAnnual(r.getPriceAnnual());
             rental.setDeposit(r.getDeposit());
             rental.setContactPerson(r.getContactPerson());
+
+//            rental.addHouse(r);
 
             em.getTransaction().begin();
             em.merge(rental);
