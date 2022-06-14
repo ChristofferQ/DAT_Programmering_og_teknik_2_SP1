@@ -6,12 +6,13 @@ import dtos.RentalDTO;
 import dtos.TenantDTO;
 import utils.EMF_Creator;
 import facades.FacadeExample;
+
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-//Todo Remove or change relevant parts before ACTUAL use
 @Path("xxx")
 public class RenameMeResource {
 
@@ -48,6 +49,7 @@ public class RenameMeResource {
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     @Path("rental/create")
+    @RolesAllowed("user")
     public Response createRental(String Rental) {
         RentalDTO r = GSON.fromJson(Rental, RentalDTO.class);
         RentalDTO re = FACADE.createRental(r);
@@ -78,6 +80,7 @@ public class RenameMeResource {
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Path("rental/delete/{id}")
+    @RolesAllowed("admin")
     public Response deleteBooking(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.deleteRental(id))).build();
     }
