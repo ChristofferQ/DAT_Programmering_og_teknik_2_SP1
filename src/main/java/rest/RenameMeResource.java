@@ -95,6 +95,13 @@ public class RenameMeResource {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Path("tenants")
+    public Response getAllTenants() {
+        return Response.ok(GSON.toJson(FACADE.getAllTenants())).build();
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("tenant/rental/{id}")
     public Response getTenantsByRental(@PathParam("id") long id) {
         return Response.ok(GSON.toJson(FACADE.getTenantsInHouseByRental(id))).build();
@@ -109,6 +116,13 @@ public class RenameMeResource {
     @Path("house/{id}")
     public Response getHouseById(@PathParam("id")long id) {
         return Response.ok(GSON.toJson(FACADE.getHouseById(id))).build();
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("houses")
+    public Response getAllHouses() {
+        return Response.ok(GSON.toJson(FACADE.getAllHouses())).build();
     }
 
     @GET

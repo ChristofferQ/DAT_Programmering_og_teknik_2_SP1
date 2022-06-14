@@ -67,6 +67,9 @@ DELETE http://localhost:8080/devops_starter_war_exploded/api/xxx/rental/delete/7
 //Tenant Calls:
 
 ###
+GET http://localhost:8080/devops_starter_war_exploded/api/xxx/tenants
+
+###
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/tenant/1
 
 ###
@@ -74,6 +77,9 @@ GET http://localhost:8080/devops_starter_war_exploded/api/xxx/tenant/rental/1
 
 
 //HouseCalls:
+
+###
+GET http://localhost:8080/devops_starter_war_exploded/api/xxx/houses
 
 ###
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx/house/1
