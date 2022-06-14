@@ -55,7 +55,7 @@ function Menu() {
         <p>Admin options:</p>
         <Link to="/CreateRental">Create Rental</Link> |{" "}
         <Link to="/ConnectBoat">Connect Boat</Link> |{" "}
-        <Link to="/Boat">Edit Boat</Link> |{" "}
+        <Link to="/EditRental">Edit Rental</Link> |{" "}
         <Link to="/DeleteRental">Delete Rental</Link>
       </nav>
       <Outlet />

@@ -66,6 +66,18 @@ function apiFacade() {
         return fetch(URL + "/api/xxx/rental/create", options).then(handleHttpErrors);
     };
 
+    const editRental = (id, startDate, endDate, priceAnnual, deposit, contactPerson) => {
+        const options = makeOptions("PUT", true, {
+            id: id,
+            startDate: startDate,
+            endDate: endDate,
+            priceAnnual: priceAnnual,
+            deposit: deposit,
+            contactPerson: contactPerson
+        })
+        return fetch(URL + "/api/xxx/rental/edit/" + id, options).then(handleHttpErrors);
+    };
+
 
     const makeOptions = (method, addToken, body) => {
         var opts = {
@@ -94,7 +106,8 @@ function apiFacade() {
         fetchData,
         postData,
         deleteData,
-        createRental
+        createRental,
+        editRental
     }
 }
 const facade = apiFacade();
