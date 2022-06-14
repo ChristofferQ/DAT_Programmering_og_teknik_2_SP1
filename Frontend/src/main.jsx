@@ -6,7 +6,7 @@ import './styles/index.css'
 import Rental from './routes/Rentals'
 import House from './routes/Houses'
 import Tenant from './routes/Tenants'
-import CreateBoat from './routes/CreateBoat'
+import CreateRental from './routes/CreateRental'
 import ConnectBoat from './routes/ConnectBoat'
 import DeleteRental from './routes/DeleteRental'
 
@@ -18,7 +18,7 @@ root.render(
         <Route path="rental" element={<Rental />} />
         <Route path="house" element={<House />} />
         <Route path="tenant" element={<Tenant />} />
-        <Route path="createboat" element={<CreateBoat />} />
+        <Route path="createrental" element={<CreateRental />} />
         <Route path="connectboat" element={<ConnectBoat />} />
         <Route path="deleterental" element={<DeleteRental />} />
         <Route

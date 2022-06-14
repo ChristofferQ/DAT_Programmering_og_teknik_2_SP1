@@ -53,7 +53,7 @@ function Menu() {
         <Link to="/House">Houses</Link> |{" "}
         <Link to="/Tenant">Tenants</Link>
         <p>Admin options:</p>
-        <Link to="/CreateBoat">Create Boat</Link> |{" "}
+        <Link to="/CreateRental">Create Rental</Link> |{" "}
         <Link to="/ConnectBoat">Connect Boat</Link> |{" "}
         <Link to="/Boat">Edit Boat</Link> |{" "}
         <Link to="/DeleteRental">Delete Rental</Link>
